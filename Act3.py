@@ -110,17 +110,30 @@ def move():
     up()
     goto(pacman.x + 10, pacman.y + 10)
     dot(20, 'yellow')
-
-    for point, course in ghosts:
+    count = 0
+    for point, course, in ghosts:
+        count += 1
+        if count == 3:
+                count = 0
         if valid(point + course):
             point.move(course)
         else:
-            options = [
-                vector(5, 0),
-                vector(-5, 0),
-                vector(0, 5),
-                vector(0, -5),
-            ]
+            print(count)
+            if (pacman.x > ghosts[count][0].x and valid(point + 5)):
+                options = [
+                    vector(5, 0)
+                ]
+            elif (pacman.x < ghosts[count][0].x and valid(point - 5)):
+                options = [
+                    vector(-5, 0)
+                ]
+            else:
+                options = [
+                    vector(5, 0),
+                    vector(-5, 0),
+                    vector(0, 5),
+                    vector(0, -5),
+                ]
             plan = choice(options)
             course.x = plan.x
             course.y = plan.y
