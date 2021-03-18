@@ -115,10 +115,10 @@ def move():
         count += 1
         if count == 3:
                 count = 0
+                
         if valid(point + course):
             point.move(course)
         else:
-            print(count)
             if (pacman.x > ghosts[count][0].x and valid(point + 5)):
                 options = [
                     vector(5, 0)
